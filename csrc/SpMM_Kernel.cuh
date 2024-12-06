@@ -218,7 +218,7 @@ __global__ void SpMM_Kernel(const half*  A,
         TileOffsets_ThisBlock2 = TileOffsets_ThisBlock1;  // otherwise will cause problem when passing
                                                           // TileOffsets_ThisBlock2[0] to SpMM_CopyFromGlobalToReg()
     }
-    //
+    // the reg size should be defined manually?
     uint32_t Registers_GlobalToShared[SparseKernelConfig::NUM_REG_FOR_SPARSE_KERNEL];
     uint32_t NNZ_ThreadLocal1 = 0;
     uint32_t NNZ_ThreadLocal2 = 0;
@@ -294,7 +294,7 @@ __global__ void SpMM_Kernel(const half*  A,
 //
 // Go through the global K dimension by a fixed step at a time.
 // write buffer[1] first, read buffer[0] first
-#pragma unroll(1)
+#pragma unroll(1) // disable unrolling
     for (int tile_id_k = 0; tile_id_k < NumIter; tile_id_k++) {
         // Using the previous prefetched value
         int StartIndex_SparseTiles1 = StartIndex_SparseTiles_Prefetch1;

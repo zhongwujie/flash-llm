@@ -22,7 +22,7 @@
 #define MMA_K 16
 #define WARP_SIZE 32
 // Unchangable
-#define WARP_ROW_TENSORS 4
+#define WARP_ROW_TENSORS 4 // how many tensors in a row of a warp
 #define BLOCK_K_TENSORS 4
 #define TILE_K (MMA_K * BLOCK_K_TENSORS)  // 64
 // Parameters for copying A_TILE & B_TILE & C_TILE
